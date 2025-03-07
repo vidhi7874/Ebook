@@ -1,0 +1,5 @@
+PORT=5513
+MONGO_CONNECTION_STRING=mongodb+srv://Vidhi:jUJtOXTdMLnLbUPN@ebookcluster.uhnq8.mongodb.net/EbookCluster?retryWrites=true&w=majority&appName=EbookCluster
+
+NODE_ENV=development
+//password:jUJtOXTdMLnLbUPN
