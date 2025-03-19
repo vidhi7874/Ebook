@@ -2,6 +2,9 @@ import { NextFunction, Request, Response } from "express";
 import createHttpError from "http-errors";
 import userModel from "./userModel";
 import bcrypt from "bcryptjs";
+import { sign } from "jsonwebtoken";
+import { config } from "../config/config";
+import { access } from "fs";
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
   //validation
@@ -31,6 +34,11 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
     password: hashedPassword,
   });
 
-  res.json({ id: newUser._id });
+  //with token we send payload to user and another parameter is secret key
+  const token = sign({ sub: newUser._id }, config.jwtSecret as string, {
+    expiresIn: "7d",
+  });
+
+  res.json({ accessToken: token });
 };
 export { createUser };
